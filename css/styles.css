@@ -58,6 +58,17 @@ img {
     max-width: 100%;
 }
 
+.current::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    top: 44px;
+    background-color: var(--secondary-accent-color);
+}
+
 .container {
     width: 1158px;
     padding-left: 15px;
@@ -118,17 +129,6 @@ img {
     color: var(--secondary-accent-color);
 }
 
-.current::after {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    top: 24px;
-    width: 48px;
-    height: 4px;
-    border-radius: 2px;
-    color: var(--secondary-accent-color);
-}
-
 .address-list {
     display: flex;
     gap: 40px;
@@ -155,12 +155,14 @@ img {
 /* --------------HERO-------------- */
 
 .hero {
+    display: flex;
     background-color: var(--primary-text-color);
     background-image: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7)), url(../images/img-people-office.jpg);
     max-width: 1600px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    justify-content: center;
     padding-top: 188px;
     padding-bottom: 188px;
 }
@@ -298,6 +300,7 @@ img {
 .team-list-item {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
     border-radius: 0px 0px 4px 4px;
+    background: var(--primary-white-color);
 }
 
 .team-list-description {
@@ -627,13 +630,15 @@ font-weight: 700;
     height: 100%;
     width: 100%;
     background-color: rgba(46, 47, 66, 0.4);
+    transition: opacity 300ms linear, visibility 300ms linear;
 }
 
 .modal {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scaleY(1);
+    transition: transform 300ms linear;
     width: 408px;
     min-height: 576px;
     background: #FCFCFC;
@@ -642,13 +647,36 @@ font-weight: 700;
         padding: 24px;
 }
 
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scaleY(0);
+}
+
 .modal-close-button {
-    display: block;
-    margin-left: auto;
+    position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 24px;
+        height: 24px;
+        fill: var(--primary-text-color);
+        background-color: #E7E9FC;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    background-color: var(--secondary-accent-color);
+    fill: var(--primary-white-color);
+    border: 1px solid transparent;
 }
 
 .modal-cross-icon {
-    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 }
 
 .is-hidden {
